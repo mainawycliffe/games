@@ -4,9 +4,9 @@ const meta = {
   title: "Air Hockey",
   difficulty: "hard", // "easy" | "medium" | "hard"
   issue: 46, // GitHub issue number holding the full spec
-  status: "unclaimed", // "unclaimed" | "in-progress" | "done"
-  author: null, // your name, e.g. "Jane Doe"
-  github: null, // your GitHub handle, e.g. "janedoe"
+  status: "done", // "unclaimed" | "in-progress" | "done"
+  author: "Faith Wekesa, Sandra Twala", // your name, e.g. "Jane Doe"
+  github: ["faithwekesa","sandratwala"], // your GitHub handle, e.g. "janedoe"
   description: "Slam the puck past your opponent's mallet.",
 };
 
