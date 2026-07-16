@@ -27,9 +27,7 @@ export default function PigDicePage() {
             issue #13. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(13)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #13)
-            </Link>
+            <Link href={issueUrl(13)}>Read the full spec (issue #13)</Link>
           </Button>
         </CardContent>
       </Card>

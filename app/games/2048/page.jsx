@@ -25,9 +25,7 @@ export default function Game2048Page() {
             issue #17. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(17)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #17)
-            </Link>
+            <Link href={issueUrl(17)}>Read the full spec (issue #17)</Link>
           </Button>
         </CardContent>
       </Card>

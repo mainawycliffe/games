@@ -27,9 +27,7 @@ export default function BubbleShooterPage() {
             issue #45. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(45)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #45)
-            </Link>
+            <Link href={issueUrl(45)}>Read the full spec (issue #45)</Link>
           </Button>
         </CardContent>
       </Card>

@@ -25,9 +25,7 @@ export default function SokobanPage() {
             issue #38. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(38)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #38)
-            </Link>
+            <Link href={issueUrl(38)}>Read the full spec (issue #38)</Link>
           </Button>
         </CardContent>
       </Card>

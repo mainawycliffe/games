@@ -27,9 +27,7 @@ export default function CheckersPage() {
             issue #31. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(31)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #31)
-            </Link>
+            <Link href={issueUrl(31)}>Read the full spec (issue #31)</Link>
           </Button>
         </CardContent>
       </Card>

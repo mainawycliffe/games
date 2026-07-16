@@ -27,9 +27,7 @@ export default function GuessTheNumberPage() {
             issue #6. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(6)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #6)
-            </Link>
+            <Link href={issueUrl(6)}>Read the full spec (issue #6)</Link>
           </Button>
         </CardContent>
       </Card>
