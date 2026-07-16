@@ -27,9 +27,7 @@ export default function MastermindPage() {
             issue #35. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(35)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #35)
-            </Link>
+            <Link href={issueUrl(35)}>Read the full spec (issue #35)</Link>
           </Button>
         </CardContent>
       </Card>

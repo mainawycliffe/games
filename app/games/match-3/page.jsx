@@ -7,7 +7,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 const BOARD_SIZE = 6;
-const GEM_COLORS = ["🍬", "🍭", "🍫", "🍩", "🍪", "🧁"];
+const GEM_COLORS = [
+  "🍬",
+  "🍭 ",
+  "🍫",
+  "🍩",
+  "🍪",
+  "🧁"
+];
 
 export default function Match3Page() {
   const [board, setBoard] = useState([]);
@@ -226,9 +233,7 @@ export default function Match3Page() {
               Reset Game
             </Button>
 
-            <Link href="/games" className="flex-1">
-              <Button className="w-full">Back to Library</Button>
-            </Link>
+           
           </div>
         </CardContent>
       </Card>

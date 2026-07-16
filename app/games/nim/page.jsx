@@ -27,9 +27,7 @@ export default function NimPage() {
             issue #10. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(10)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #10)
-            </Link>
+            <Link href={issueUrl(10)}>Read the full spec (issue #10)</Link>
           </Button>
         </CardContent>
       </Card>

@@ -27,9 +27,7 @@ export default function TriviaQuizPage() {
             issue #27. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(27)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #27)
-            </Link>
+            <Link href={issueUrl(27)}>Read the full spec (issue #27)</Link>
           </Button>
         </CardContent>
       </Card>

@@ -25,9 +25,7 @@ export default function DotsAndBoxesPage() {
             issue #9. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(9)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #9)
-            </Link>
+            <Link href={issueUrl(9)}>Read the full spec (issue #9)</Link>
           </Button>
         </CardContent>
       </Card>

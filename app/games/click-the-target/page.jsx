@@ -27,9 +27,7 @@ export default function ClickTheTargetPage() {
             issue #14. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(14)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #14)
-            </Link>
+            <Link href={issueUrl(14)}>Read the full spec (issue #14)</Link>
           </Button>
         </CardContent>
       </Card>

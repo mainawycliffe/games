@@ -27,9 +27,7 @@ export default function MancalaPage() {
             issue #29. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(29)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #29)
-            </Link>
+            <Link href={issueUrl(29)}>Read the full spec (issue #29)</Link>
           </Button>
         </CardContent>
       </Card>

@@ -25,9 +25,7 @@ export default function MinesweeperPage() {
             issue #19. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(19)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #19)
-            </Link>
+            <Link href={issueUrl(19)}>Read the full spec (issue #19)</Link>
           </Button>
         </CardContent>
       </Card>
