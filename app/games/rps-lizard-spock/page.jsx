@@ -27,9 +27,7 @@ export default function RpsLizardSpockPage() {
             issue #56. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(56)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #56)
-            </Link>
+            <Link href={issueUrl(56)}>Read the full spec (issue #56)</Link>
           </Button>
         </CardContent>
       </Card>

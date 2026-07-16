@@ -132,32 +132,17 @@ export default function AirHockeyPage() {
             </Badge>
           </div>
         </CardHeader>
-        <CardContent className="text-muted-foreground space-y-4 text-center flex flex-col items-center">
-          <p className="text-text muted text-base">Slam the puck past the mallet! Speed increases every 30s.</p>
-
-          <div className="flex justify-between w-full max-w-[600px] text-lg font-semibold px-2">
-            <span className="text-blue-500">Player: {scores.p}</span>
-            <span className="text-red-500">Computer: {scores.c}</span>
-          </div>
-
-          <div ref={containerRef} className="relative w-[600px] h-[400px] bg-slate-800 rounded-lg overflow-hidden border border-border shadow-inner">
-            {gameState !== "playing" && (
-              <div className="absolute inset-0 bg-slate-950/90 flex flex-col items-center justify-center gap-4 z-20">
-                <h2 className="text-2xl font-bold text-white">
-                  {gameState === "idle" ? "Ready to Play?" : scores.p > scores.c ? "🏆 YOU WIN!" : "💥 YOU LOSE!"}
-                </h2>
-                <Button onClick={handleStart} size="lg" className={gameState === "idle" ? "bg-blue-600 hover:bg-blue-700" : "bg-emerald-600 hover:bg-emerald-700"}>
-                  {gameState === "idle" ? "Start Game" : "Play Again"}
-                </Button>
-              </div>
-            )}
-            <canvas ref={canvasRef} className="absolute top-0 left-0 block w-[600px] h-[400px]" />
-          </div>
-
-          <Button asChild variant="outline" size="sm" className="mt-2">
-            <Link href="github.com" target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #46)
-            </Link>
+        <CardContent className="text-muted-foreground space-y-4 text-sm">
+          <p className="text-foreground text-base">
+            {"Slam the puck past your opponent's mallet."}
+          </p>
+          <p>🚧 This game hasn&apos;t been built yet.</p>
+          <p>
+            The full spec — objective, rules, required features and definition of done — lives in
+            issue #46. Claim it, then replace this file with your game.
+          </p>
+          <Button asChild variant="outline" size="sm">
+            <Link href={issueUrl(46)}>Read the full spec (issue #46)</Link>
           </Button>
         </CardContent>
       </Card>
