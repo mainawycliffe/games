@@ -27,9 +27,7 @@ export default function AirHockeyPage() {
             issue #46. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(46)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #46)
-            </Link>
+            <Link href={issueUrl(46)}>Read the full spec (issue #46)</Link>
           </Button>
         </CardContent>
       </Card>

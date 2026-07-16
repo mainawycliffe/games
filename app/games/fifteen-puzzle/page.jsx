@@ -25,9 +25,7 @@ export default function FifteenPuzzlePage() {
             issue #21. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(21)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #21)
-            </Link>
+            <Link href={issueUrl(21)}>Read the full spec (issue #21)</Link>
           </Button>
         </CardContent>
       </Card>

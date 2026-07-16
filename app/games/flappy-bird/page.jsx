@@ -27,9 +27,7 @@ export default function FlappyBirdPage() {
             issue #40. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(40)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #40)
-            </Link>
+            <Link href={issueUrl(40)}>Read the full spec (issue #40)</Link>
           </Button>
         </CardContent>
       </Card>

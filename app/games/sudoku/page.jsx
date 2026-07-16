@@ -27,9 +27,7 @@ export default function SudokuPage() {
             issue #25. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(25)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #25)
-            </Link>
+            <Link href={issueUrl(25)}>Read the full spec (issue #25)</Link>
           </Button>
         </CardContent>
       </Card>

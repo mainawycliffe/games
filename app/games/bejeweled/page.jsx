@@ -25,9 +25,7 @@ export default function BejeweledPage() {
             issue #55. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(55)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #55)
-            </Link>
+            <Link href={issueUrl(55)}>Read the full spec (issue #55)</Link>
           </Button>
         </CardContent>
       </Card>

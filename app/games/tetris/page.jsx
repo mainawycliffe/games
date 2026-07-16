@@ -27,9 +27,7 @@ export default function TetrisPage() {
             issue #39. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(39)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #39)
-            </Link>
+            <Link href={issueUrl(39)}>Read the full spec (issue #39)</Link>
           </Button>
         </CardContent>
       </Card>
