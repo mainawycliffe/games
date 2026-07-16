@@ -27,9 +27,7 @@ export default function MazeRunnerPage() {
             issue #36. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(36)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #36)
-            </Link>
+            <Link href={issueUrl(36)}>Read the full spec (issue #36)</Link>
           </Button>
         </CardContent>
       </Card>

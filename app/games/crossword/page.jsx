@@ -27,9 +27,7 @@ export default function CrosswordPage() {
             issue #54. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(54)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #54)
-            </Link>
+            <Link href={issueUrl(54)}>Read the full spec (issue #54)</Link>
           </Button>
         </CardContent>
       </Card>

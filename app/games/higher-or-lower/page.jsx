@@ -27,9 +27,7 @@ export default function HigherOrLowerPage() {
             issue #7. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(7)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #7)
-            </Link>
+            <Link href={issueUrl(7)}>Read the full spec (issue #7)</Link>
           </Button>
         </CardContent>
       </Card>

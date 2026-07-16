@@ -27,9 +27,7 @@ export default function FroggerPage() {
             issue #43. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(43)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #43)
-            </Link>
+            <Link href={issueUrl(43)}>Read the full spec (issue #43)</Link>
           </Button>
         </CardContent>
       </Card>

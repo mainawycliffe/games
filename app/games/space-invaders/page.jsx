@@ -27,9 +27,7 @@ export default function SpaceInvadersPage() {
             issue #42. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(42)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #42)
-            </Link>
+            <Link href={issueUrl(42)}>Read the full spec (issue #42)</Link>
           </Button>
         </CardContent>
       </Card>
