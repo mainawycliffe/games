@@ -27,9 +27,7 @@ export default function MemoryMatchPage() {
             issue #3. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(3)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #3)
-            </Link>
+            <Link href={issueUrl(3)}>Read the full spec (issue #3)</Link>
           </Button>
         </CardContent>
       </Card>

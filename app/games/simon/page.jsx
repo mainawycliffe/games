@@ -27,9 +27,7 @@ export default function SimonPage() {
             issue #20. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(20)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #20)
-            </Link>
+            <Link href={issueUrl(20)}>Read the full spec (issue #20)</Link>
           </Button>
         </CardContent>
       </Card>

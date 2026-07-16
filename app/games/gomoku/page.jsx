@@ -25,9 +25,7 @@ export default function GomokuPage() {
             issue #59. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(59)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #59)
-            </Link>
+            <Link href={issueUrl(59)}>Read the full spec (issue #59)</Link>
           </Button>
         </CardContent>
       </Card>

@@ -27,9 +27,7 @@ export default function SpotTheDifferencePage() {
             issue #49. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(49)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #49)
-            </Link>
+            <Link href={issueUrl(49)}>Read the full spec (issue #49)</Link>
           </Button>
         </CardContent>
       </Card>
