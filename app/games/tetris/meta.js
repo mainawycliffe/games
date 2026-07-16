@@ -4,9 +4,9 @@ const meta = {
   title: "Tetris",
   difficulty: "hard", // "easy" | "medium" | "hard"
   issue: 39, // GitHub issue number holding the full spec
-  status: "unclaimed", // "unclaimed" | "in-progress" | "done"
-  author: null, // your name, e.g. "Jane Doe"
-  github: null, // your GitHub handle, e.g. "janedoe"
+  status: "in-progress", // "unclaimed" | "in-progress" | "done"
+  author: "uwanyirigira brigitte", // your name, e.g. "Jane Doe"
+  github: "uwanyirigirabrigittte-ops", // your GitHub handle, e.g. "janedoe"
   description: "Rotate and stack falling blocks to clear lines.",
 };
 
