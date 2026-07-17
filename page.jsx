@@ -449,7 +449,7 @@ export default function BattleshipGame() {
               title={`Sound: ${soundTheme === 'tiktok' ? 'TikTok style' : 'Cinematic'}`}
               className="rounded-full border border-blue-200 bg-white/70 px-2 py-1 text-lg shadow-sm transition-transform hover:scale-110 active:scale-95"
             >
-              {soundTheme === 'tiktok' ? '🎵' : '🎬'}
+           
             </button>
           </div>
           <p className="mb-4 text-sm font-medium text-slate-500">
@@ -458,14 +458,14 @@ export default function BattleshipGame() {
 
           <div
             className={`mb-5 rounded-xl border px-4 py-3 text-base font-extrabold shadow-sm ${gameStatus === 'won'
-                ? 'border-emerald-300 bg-gradient-to-r from-emerald-400 to-green-500 text-white'
-                : gameStatus === 'lost'
-                  ? 'border-rose-300 bg-gradient-to-r from-rose-500 to-red-600 text-white'
-                  : gameStatus === 'draw'
-                    ? 'border-violet-300 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white'
-                    : turn === 'player'
-                      ? 'border-cyan-200 bg-cyan-50 text-cyan-800'
-                      : 'border-amber-200 bg-amber-50 text-amber-800'
+              ? 'border-emerald-300 bg-gradient-to-r from-emerald-400 to-green-500 text-white'
+              : gameStatus === 'lost'
+                ? 'border-rose-300 bg-gradient-to-r from-rose-500 to-red-600 text-white'
+                : gameStatus === 'draw'
+                  ? 'border-violet-300 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white'
+                  : turn === 'player'
+                    ? 'border-cyan-200 bg-cyan-50 text-cyan-800'
+                    : 'border-amber-200 bg-amber-50 text-amber-800'
               }`}
           >
             {statusMessage}
@@ -478,8 +478,8 @@ export default function BattleshipGame() {
               </span>
               <span
                 className={`rounded-full px-3 py-0.5 font-extrabold ${lowTime
-                    ? 'bg-red-100 text-red-600 animate-pulse'
-                    : 'bg-blue-100 text-blue-700'
+                  ? 'bg-red-100 text-red-600 animate-pulse'
+                  : 'bg-blue-100 text-blue-700'
                   }`}
               >
                 {timeLeft}s
@@ -531,8 +531,8 @@ export default function BattleshipGame() {
                 <span
                   key={ship.name}
                   className={`flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold transition-all ${sunk
-                      ? 'border-rose-300 bg-rose-100 text-rose-500 line-through opacity-70'
-                      : 'border-cyan-200 bg-cyan-50 text-cyan-800'
+                    ? 'border-rose-300 bg-rose-100 text-rose-500 line-through opacity-70'
+                    : 'border-cyan-200 bg-cyan-50 text-cyan-800'
                     }`}
                 >
                   <span>{sunk ? '💀' : SHIP_ICON[ship.name] ?? '🚢'}</span>
