@@ -371,19 +371,18 @@ export default function TableTennisPage() {
         </div>
       </div>
 
-      {/* 3. PRIMARY INTERACTIVE GAME BOARD DISPLAY WINDOW */}
       <div className="relative border-4 border-slate-900 bg-slate-900 rounded-2xl shadow-2xl overflow-hidden">
         <canvas ref={canvasRef} width={CONFIG.CANVAS_WIDTH} height={CONFIG.CANVAS_HEIGHT} className="block" />
 
-        {/* Modular Screen Control Interceptor Overlays */}
+       
         {gameState !== "PLAYING" && (
           <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center">
             {gameState === "START" && (
               <>
-                {/* 1. HEADING TITLE */}
+            
                 <h1 className="text-3xl font-black uppercase tracking-wider text-slate-100 mb-2">Modern Ping Pong</h1>
 
-                {/* 2. LEVEL SELECTOR INTERFACE */}
+             
                 <div className="mb-6">
                   <p className="text-slate-400 text-xs uppercase tracking-widest font-mono font-bold mb-2">Select AI Difficulty Level:</p>
                   <div className="flex gap-2 justify-center bg-slate-900 p-1.5 rounded-xl border border-slate-800 w-fit mx-auto">
@@ -408,12 +407,11 @@ export default function TableTennisPage() {
                   </div>
                 </div>
 
-                {/* 3. PARAGRAPH DESCRIPTION */}
                 <p className="text-slate-400 text-xs max-w-sm mb-6 leading-relaxed">
                   Slide your mouse pointer across the screen field framework area to automatically maneuver your lower racket handle asset.
                 </p>
 
-                {/* 4. MODE BUTTONS SELECTION CONTAINER */}
+              
                 <div className="flex flex-col gap-3 w-full max-w-xs mx-auto">
                   <button onClick={() => initGame("VS_AI")} className="w-full px-5 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 font-bold uppercase rounded-xl tracking-wider text-sm shadow-md hover:from-blue-400 hover:to-indigo-500 transition text-white border-0 cursor-pointer">
                     Singleplayer vs AI
