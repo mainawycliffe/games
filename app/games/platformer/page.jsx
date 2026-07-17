@@ -25,9 +25,7 @@ export default function PlatformerPage() {
             issue #52. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(52)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #52)
-            </Link>
+            <Link href={issueUrl(52)}>Read the full spec (issue #52)</Link>
           </Button>
         </CardContent>
       </Card>

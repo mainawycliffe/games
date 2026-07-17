@@ -25,9 +25,7 @@ export default function ReversiPage() {
             issue #30. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(30)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #30)
-            </Link>
+            <Link href={issueUrl(30)}>Read the full spec (issue #30)</Link>
           </Button>
         </CardContent>
       </Card>

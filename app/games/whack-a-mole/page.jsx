@@ -25,9 +25,7 @@ export default function WhackAMolePage() {
             issue #22. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(22)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #22)
-            </Link>
+            <Link href={issueUrl(22)}>Read the full spec (issue #22)</Link>
           </Button>
         </CardContent>
       </Card>

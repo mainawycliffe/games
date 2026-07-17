@@ -27,9 +27,7 @@ export default function QuickMathPage() {
             issue #53. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(53)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #53)
-            </Link>
+            <Link href={issueUrl(53)}>Read the full spec (issue #53)</Link>
           </Button>
         </CardContent>
       </Card>
