@@ -4,7 +4,7 @@ const meta = {
   title: "Minesweeper",
   difficulty: "medium", // "easy" | "medium" | "hard"
   issue: 19, // GitHub issue number holding the full spec
-  status: "in-progress", // "unclaimed" | "in-progress" | "done"
+  status: "done", // "unclaimed" | "in-progress" | "done"
   author: "Clare Tondori, Lucy Gacema",
   github: "claretondori, Lucy-Gacema", // your GitHub handle, e.g. "janedoe"
   description: "Clear the grid without detonating a mine.",
