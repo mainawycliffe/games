@@ -7,12 +7,7 @@ export default function GamesLayout({ children }) {
     <div className="flex min-h-full flex-col">
       <header className="border-b">
         <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-3">
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/">
-              <ArrowLeft className="size-4" />
-              Back to arcade
-            </Link>
-          </Button>
+          
           <span className="text-muted-foreground text-sm font-medium">AkiraChix Games</span>
         </div>
       </header>

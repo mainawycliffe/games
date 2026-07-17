@@ -1,0 +1,158 @@
+body {
+  margin: 0;
+  background-color: #1f3073;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffffff;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.window-box {
+  background-color: #690550;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  border: 3px solid #8c0663;
+}
+
+.title {
+  margin-top: 0;
+  color: #02b5be;
+  letter-spacing: 2px;
+  font-size: 2rem;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.controls button {
+  background-color: #1f3073;
+  color: #ffffff;
+  border: 2px solid #8c0663;
+  padding: 6px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.controls button:hover, .controls button.active {
+  background-color: #02b5be;
+  border-color: #02b5be;
+  color: #1f3073;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f3073;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 2px solid #8c0663;
+}
+
+.stat {
+  font-family: monospace;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #02b5be;
+}
+
+.status-face {
+  font-size: 2rem;
+  user-select: none;
+}
+
+.global-restart-btn {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  background-color: #02b5be;
+  color: #1f3073;
+  border: none;
+  padding: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #028a91;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.global-restart-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #028a91;
+}
+
+.grid {
+  display: grid;
+  gap: 4px;
+  background-color: #8c0663;
+  padding: 6px;
+  border-radius: 8px;
+  margin: 0 auto;
+  max-width: fit-content;
+}
+
+.cell {
+  width: 32px;
+  height: 32px;
+  background-color: #1f3073;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: inset 0 -3px 0 rgba(0,0,0,0.2);
+}
+
+.cell:hover:not(.revealed) {
+  background-color: #02b5be;
+}
+
+.cell.revealed {
+  background-color: #690550;
+  box-shadow: none;
+  color: #02b5be;
+}
+
+.cell.flagged {
+  color: #ff3366;
+}
+
+.banner {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.banner.win {
+  background-color: #02b5be;
+  color: #1f3073;
+}
+
+.banner.lose {
+  background-color: #8c0663;
+  color: #ffffff;
+}
+
+
+
