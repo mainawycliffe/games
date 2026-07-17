@@ -61,7 +61,9 @@ export default function QuizPage() {
     return () => {
       if (timerRef.current) timerRef.current.stopTimer();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex]);
+
 
   return (
     <div className="mx-auto max-w-md py-12 relative">
