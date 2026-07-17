@@ -5,8 +5,8 @@ const meta = {
   difficulty: "medium", // "easy" | "medium" | "hard"
   issue: 17, // GitHub issue number holding the full spec
   status: "unclaimed", // "unclaimed" | "in-progress" | "done"
-  author: null, // your name, e.g. "Jane Doe"
-  github: null, // your GitHub handle, e.g. "janedoe"
+  author: "Mahlet and Stacey", // your name, e.g. "Jane Doe"
+  github: "ndutastacey", // your GitHub handle, e.g. "janedoe"
   description: "Slide and merge tiles to reach 2048.",
 };
 
