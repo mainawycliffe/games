@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import QuizPage from "./page";
 import { score, quizCount, btn } from "./logic";
 
-//Since our data has more than 10 questions, we have decided to choose two questions from the data.js and do mocking for the trivial quiz app
+//Since our data has more than 10 questions, we have decided to choose two questions from the data.js and do mocking for the trivia quiz game
 // The reason is that since the questions are ordered, incase someone changes the order, our component testing will fail.
 // The other reason is that incase  of  a typo error in the data.js, it could cause an unexpected behavior thus a need for mocking
 
