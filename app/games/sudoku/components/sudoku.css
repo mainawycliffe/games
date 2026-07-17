@@ -1,0 +1,77 @@
+.sudoku-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.sudoku-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 40px);
+  grid-template-rows: repeat(9, 40px);
+  border: 2px solid #333;
+  margin-bottom: 20px;
+}
+
+.sudoku-cell {
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  padding: 0;
+}
+
+.border-left-thick { border-left: 2.5px solid #333; }
+.border-top-thick { border-top: 2.5px solid #333; }
+.border-right-thick { border-right: 2.5px solid #333; }
+.border-bottom-thick { border-bottom: 2.5px solid #333; }
+
+.cell-fixed {
+  background-color: #f0f0f0;
+  color: #333;
+  font-weight: bold;
+  cursor: not-allowed;
+}
+
+.cell-editable {
+  color: #0056b3;
+}
+
+.cell-selected {
+  background-color: #b3d7ff !important;
+}
+
+.cell-conflict {
+  background-color: #fee2e2 !important;
+  color: #dc2626 !important;
+  font-weight: bold;
+}
+
+.number-pad, .action-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 5px;
+}
+
+.number-button, .erase-button, .btn {
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-check { background-color: #20ca26; border-radius: 10px; color: white; border: none; }
+.btn-easy { background-color: #1320da; border-radius: 10px; color: white; border: none; }
+
+.message {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 18px;
+}
