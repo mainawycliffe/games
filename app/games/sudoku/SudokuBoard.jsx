@@ -15,7 +15,7 @@ export default function SudokuBoard() {
     const { puzzle, solution } = generateSudoku();
     setPuzzle(puzzle);
     setSolution(solution);
-    setBoard(puzzle.map(row => [...row]));
+    setBoard(puzzle.map((row) => [...row]));
     setSelected(null);
     setMessage("");
   }
@@ -48,7 +48,7 @@ export default function SudokuBoard() {
   function handleNumberInput(num) {
     if (!selected) return;
     const { row, col } = selected;
-    const newBoard = board.map(r => [...r]);
+    const newBoard = board.map((r) => [...r]);
     newBoard[row][col] = num;
     setBoard(newBoard);
     setMessage("");
@@ -57,7 +57,7 @@ export default function SudokuBoard() {
   function handleErase() {
     if (!selected) return;
     const { row, col } = selected;
-    const newBoard = board.map(r => [...r]);
+    const newBoard = board.map((r) => [...r]);
     newBoard[row][col] = 0;
     setBoard(newBoard);
   }
@@ -75,15 +75,13 @@ export default function SudokuBoard() {
   }
 
   function checkSolution() {
-    const isComplete = board.every(row => row.every(cell => cell !== 0));
+    const isComplete = board.every((row) => row.every((cell) => cell !== 0));
     if (!isComplete) {
       setMessage("Board isn't full yet.");
       return;
     }
 
-    const isCorrect = board.every((row, r) =>
-      row.every((cell, c) => cell === solution[r][c])
-    );
+    const isCorrect = board.every((row, r) => row.every((cell, c) => cell === solution[r][c]));
 
     setMessage(isCorrect ? "🎉 Solved correctly!" : "❌ Something's wrong.");
   }
@@ -98,10 +96,7 @@ export default function SudokuBoard() {
         {board.map((row, rowIndex) =>
           row.map((cell, colIndex) => {
             const isFixed = puzzle[rowIndex][colIndex] !== 0;
-            const isSelected =
-              selected &&
-              selected.row === rowIndex &&
-              selected.col === colIndex;
+            const isSelected = selected && selected.row === rowIndex && selected.col === colIndex;
             const hasConflict = isCellConflicting(rowIndex, colIndex, cell);
 
             const classNames = [
@@ -126,17 +121,13 @@ export default function SudokuBoard() {
                 {cell !== 0 ? cell : ""}
               </button>
             );
-          })
+          }),
         )}
       </div>
 
       <div className="number-pad">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
-          <button
-            key={num}
-            onClick={() => handleNumberInput(num)}
-            className="number-button"
-          >
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+          <button key={num} onClick={() => handleNumberInput(num)} className="number-button">
             {num}
           </button>
         ))}

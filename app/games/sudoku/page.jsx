@@ -1,4 +1,4 @@
-import SudokuBoard from "./components/SudokuBoard.jsx";
+import SudokuBoard from "./SudokuBoard.jsx";
 
 export default function Page() {
   return <SudokuBoard />;
