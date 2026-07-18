@@ -154,7 +154,7 @@ export default function BejeweledPage() {
     const { hasMatch, matchedGrid } = findMatches(workingBoard);
 
     if (hasMatch) {
-      // 1. Trigger beautiful match glitter immediately
+    
       triggerMatchGlitter();
 
       const nextMovesValue = moves - 1;

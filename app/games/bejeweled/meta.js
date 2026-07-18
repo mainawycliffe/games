@@ -4,7 +4,7 @@ const meta = {
   issue: 55,
   status: "done",
   author: "Susan and Sumaya",
-  github: "YOUR_GITHUB",
+  github: "susanwanjiruu",
   description: "Swap jewels to clear cascading matches.",
 };
 
