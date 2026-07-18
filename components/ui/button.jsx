@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
-import { Slot } from "@radix-ui/react-slot"; // Import Radix Slot for asChild capability
+import { Slot } from "@radix-ui/react-slot"; 
 import { cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
@@ -42,11 +42,10 @@ const buttonVariants = cva(
   },
 );
 
-// Added React.forwardRef to safely forward DOM node behaviors for links & layout trees
+
 const Button = React.forwardRef(
   ({ className, variant = "default", size = "default", asChild = false, ...props }, ref) => {
     
-    // If asChild is true, we fallback to Radix Slot. Otherwise, we use Base UI Primitive.
     if (asChild) {
       return (
         <Slot
