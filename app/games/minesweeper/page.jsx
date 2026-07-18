@@ -204,7 +204,7 @@ useEffect(() => {
   {gameWon && (
   <div className="popup-overlay">
     <div className="popup-card" style={{ backgroundColor: "#15803d" }}> 
-      <h2 className="popup-title"> YOU SURVIVED!!!! Congratulations! </h2>
+      <h2 className="popup-title"> YOU SURVIVED!!!! Congratulations! Well done! </h2>
       <p className="popup-text">
         Perfect clear achieved in {minutes < 10 ? "0" : ""}{minutes}:{remainingSeconds < 10 ? "0" : ""}{remainingSeconds}!
       </p>
