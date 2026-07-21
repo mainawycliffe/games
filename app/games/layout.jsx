@@ -6,13 +6,18 @@ export default function GamesLayout({ children }) {
   return (
     <div className="flex min-h-full flex-col">
       <header className="border-b">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-3">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between p-4">
+        
           <Button asChild variant="ghost" size="sm">
-            <Link href="/">
+            <Link
+              href="/games"
+              className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm"
+            >
               <ArrowLeft className="size-4" />
               Back to arcade
             </Link>
           </Button>
+
           <span className="text-muted-foreground text-sm font-medium">AkiraChix Games</span>
         </div>
       </header>
@@ -20,3 +25,6 @@ export default function GamesLayout({ children }) {
     </div>
   );
 }
+
+
+
