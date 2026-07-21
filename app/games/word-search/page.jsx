@@ -32,8 +32,8 @@ export default function WordSearchPage() {
 
     let newGrid = Array(GRID_SIZE).fill(null).map(() => Array(GRID_SIZE).fill(''));
 
-    const directions = [,  
-      [1, 1]   
+    // Fixed array values to prevent undefined math errors
+    const directions = [, [1, 0], [1, 1], [0, -1], [-1, 0], [-1, -1], [1, -1], [-1, 1]
     ];
 
     selected.forEach((word) => {
@@ -41,14 +41,20 @@ export default function WordSearchPage() {
       let attempts = 0;
 
       while (!placed && attempts < 100) {
-        const [dirR, dirC] = directions[Math.floor(Math.random() * directions.length)];
+        const currentDir = directions[Math.floor(Math.random() * directions.length)];
+        if (!currentDir) {
+          attempts++;
+          continue;
+        }
+
+        const [dirR, dirC] = currentDir;
         const row = Math.floor(Math.random() * GRID_SIZE);
         const col = Math.floor(Math.random() * GRID_SIZE);
 
-        if (
-          row + dirR * (word.length - 1) < GRID_SIZE &&
-          col + dirC * (word.length - 1) < GRID_SIZE
-        ) {
+        const finalR = row + dirR * (word.length - 1);
+        const finalC = col + dirC * (word.length - 1);
+
+        if (finalR >= 0 && finalR < GRID_SIZE && finalC >= 0 && finalC < GRID_SIZE) {
           let canPlace = true;
           for (let i = 0; i < word.length; i++) {
             const nextR = row + dirR * i;
@@ -219,30 +225,29 @@ export default function WordSearchPage() {
                     return (
                       <li 
                         key={word}
-                        className={`text-sm font-mono tracking-wide flex items-center gap-2
-                          ${isFound ? 'line-through text-muted-foreground/60 italic' : 'text-foreground font-semibold'}
-                        `}
+                        className={`text-sm font-mono tracking-wide flex items-center gap-2 ${isFound ? 'line-through text-muted-foreground/60' : 'text-foreground'}`}
                       >
-                        <span className={`w-2 h-2 rounded-full ${isFound ? 'bg-muted-foreground/40' : 'bg-primary'}`} />
+                        <span className={`w-2 h-2 rounded-full ${isFound ? 'bg-emerald-500' : 'bg-amber-500'}`} />
                         {word}
                       </li>
                     );
                   })}
                 </ul>
               </div>
-              <div className="text-xs text-muted-foreground text-center pt-3 border-t">
-                Solved: {foundWords.length} / {targetWords.length}
+              <div className="mt-4 pt-3 border-t text-xs text-muted-foreground text-center">
+                Found: {foundWords.length} / {targetWords.length}
               </div>
             </div>
           </div>
+          
+          <div className="pt-4 border-t flex justify-center">
+          <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              ← Back to Arcade
+            </Link>
+          </div>
         </CardContent>
-      </Card>
-      
-      <div className="mt-4 text-center">
-        <Button variant="link" size="sm" asChild>
-          <Link href="/games">Back to Arcade</Link>
-        </Button>
+      </Card> 
       </div>
-    </div>
+    
   );
 }
