@@ -83,7 +83,7 @@ export default function SudokuBoard() {
 
     const isCorrect = board.every((row, r) => row.every((cell, c) => cell === solution[r][c]));
 
-    setMessage(isCorrect ? "🎉 Solved correctly!" : "❌ Something's wrong.");
+    setMessage(isCorrect ? "Solved correctly!" : " Something's wrong.");
   }
 
   if (!board) return <div>Loading...</div>;
