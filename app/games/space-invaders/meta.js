@@ -4,8 +4,8 @@ const meta = {
   difficulty: "hard",
   issue: 42,
   status: "done",
-  author: "Joselyne Dusabemungu",
-  github: "joselynedusabemungu",
+  author: "Joselyne Dusabemungu and Emma Mwelwa",
+  github: "joselynedusabemungu and EmmaMwelwa",
   description: "Shoot the descending alien waves before they land.",
 };
 
