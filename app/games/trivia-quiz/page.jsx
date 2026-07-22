@@ -61,13 +61,15 @@ export default function QuizPage() {
     return () => {
       if (timerRef.current) timerRef.current.stopTimer();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex]);
 
 
   return (
-    <div className="mx-auto max-w-md py-12 relative">
-      <Card>
+    <div className="mx-auto max-w-md py-12  relative">
+       <Card 
+        className="quizcard bg-cover bg-center relative overflow-hidden text-white" 
+        style={{ backgroundImage: "url('/quiz-bg.jpg')" }}
+      >
         <CardHeader>
           <div className="flex items-center justify-between gap-2">
             <CardTitle>The Science Myths</CardTitle>
@@ -75,11 +77,14 @@ export default function QuizPage() {
               {timerText}
             </div>
           </div>
-          <div className="flex justify-between items-center pt-2">
-            <Badge variant="outline">
+          <div className="flex justify-between items-center pt-2 border-t border-white/10 ">
+            <Badge 
+            variant="outline" 
+            className="text-zinc-200 border-zinc-600 bg-white/5 backdrop-blur-sm"
+            >
               Topic: {currentQuestion?.topic}
             </Badge>
-            <span className="text-xs text-muted-foreground font-mono">
+            <span className="text-xs text-zinc-300 font-mono">
               Progress: {quizCount(currentIndex, quizData.length)}
             </span>
           </div>
@@ -87,7 +92,7 @@ export default function QuizPage() {
         
         <CardContent className="text-muted-foreground space-y-4 text-sm">
           <main className="main-content space-y-6">
-            <div className="question text-base font-medium text-foreground">
+            <div className="question text-base font-semibold text-white tracking-wide">
               {currentQuestion?.question}
             </div>
 
@@ -97,18 +102,18 @@ export default function QuizPage() {
                 const isThisSelected = selectedAnswer === text;
                 const isThisCorrect = optionObj.isCorrect;
                 
-                let buttonStyle = "border p-3 rounded-lg text-left transition-all w-full flex items-center gap-3 ";
+                let buttonStyle = "border p-3 rounded-lg text-left text-white transition-all w-full flex items-center gap-3 ";
                 
                 if (hasAnswered) {
                   if (isThisCorrect) {
-                    buttonStyle += "bg-emerald-500 text-white border-emerald-500 font-medium";
+                    buttonStyle += "bg-emerald-900 text-white border-emerald-500 font-medium";
                   } else if (isThisSelected && !isThisCorrect) {
                     buttonStyle += "bg-destructive text-destructive-foreground border-destructive";
                   } else {
-                    buttonStyle += "opacity-40 bg-muted cursor-not-allowed";
+                    buttonStyle += "bg-zinc-900/80 text-zinc-300 border-white/5 cursor-not-allowed ";
                   }
                 } else {
-                  buttonStyle += "hover:bg-accent hover:text-accent-foreground cursor-pointer";
+                  buttonStyle += "hover:bg-slate-900/90 hover:border-blue-400 hover:shadow-[0_0_12px_rgba(59,130,246,0.4)] hover:scale-[1.01] cursor-pointer  ";
                 }
 
                 return (
@@ -128,8 +133,8 @@ export default function QuizPage() {
             </div>
 
             {hasAnswered && selectedAnswer && (
-              <div className="p-3 bg-muted rounded-md text-xs italic text-foreground transition-all">
-                {currentQuestion?.options.find(o => btn(o).text === selectedAnswer)?.reason}
+              <div className="p-3 bg-slate-950/70 border border-white/10 rounded-md text-xs italic text-zinc-200 shadow-inner transition-all">
+                <strong>Explanation:</strong> {currentQuestion?.options.find(o => btn(o).text === selectedAnswer)?.reason}
               </div>
             )}
 
