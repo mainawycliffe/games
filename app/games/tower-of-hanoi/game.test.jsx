@@ -43,15 +43,15 @@ describe("<TowerOfHanoiPage />", () => {
       const dragStartEvent = {
         dataTransfer: {
           setData: vi.fn(),
-          getData: vi.fn(() => fromIndex.toString())
-        }
+          getData: vi.fn(() => fromIndex.toString()),
+        },
       };
 
       fireEvent.dragStart(topDisk, dragStartEvent);
       fireEvent.dragOver(targetRod);
       fireEvent.drop(targetRod, {
         preventDefault: vi.fn(),
-        dataTransfer: dragStartEvent.dataTransfer
+        dataTransfer: dragStartEvent.dataTransfer,
       });
     };
 
