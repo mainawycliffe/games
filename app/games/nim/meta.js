@@ -1,13 +1,12 @@
-// Metadata for the "Nim" game card on the arcade homepage.
-// When you build this game, fill in author + github and set status to "done".
+
 const meta = {
   title: "Nim",
-  difficulty: "easy", // "easy" | "medium" | "hard"
-  issue: 10, // GitHub issue number holding the full spec
-  status: "unclaimed", // "unclaimed" | "in-progress" | "done"
-  author: null, // your name, e.g. "Jane Doe"
-  github: null, // your GitHub handle, e.g. "janedoe"
-  description: "Take turns removing objects; don't take the last one.",
+  difficulty: "easy",
+  issue: 10, 
+  status: "done",
+  authors: "Najma Hares, Walusungu Nyirenda",
+  github: "najmahares, walusungunyirendaa", 
+  description: "Take turns removing objects; don't be the one to take the last object.",
 };
 
 export default meta;
