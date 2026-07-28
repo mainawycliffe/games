@@ -24,7 +24,7 @@ export default function SnakePage() {
             The full spec — objective, rules, required features and definition of done — lives in
             issue #23. Claim it, then replace this file with your game.
           </p>
-          <Button asChild variant="outline" size="sm">
+          <Button variant="outline" size="sm">
             <Link href={issueUrl(23)}>Read the full spec (issue #23)</Link>
           </Button>
         </CardContent>
