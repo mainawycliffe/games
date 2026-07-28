@@ -1,13 +1,24 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 const GRID_SIZE = 10;
-const WORD_POOL = ['REACT', 'NEXTJS', 'TAILWIND', 'JAVASCRIPT', 'CODE', 'ROUTER', 'CHIPS', 'COMPILER', 'DEV', 'APP'];
+const WORD_POOL = [
+  "REACT",
+  "NEXTJS",
+  "TAILWIND",
+  "JAVASCRIPT",
+  "CODE",
+  "ROUTER",
+  "CHIPS",
+  "COMPILER",
+  "DEV",
+  "APP",
+];
 
 // 🚧 PLACEHOLDER — this game hasn't been built yet.
 // If you claimed "Word Search", replace everything in this file with your game.
@@ -21,7 +32,7 @@ export default function WordSearchPage() {
   const [isSelecting, setIsSelecting] = useState(false);
   const [foundCells, setFoundCells] = useState(new Set());
 
-  const initGame = () => {
+  const initGame = useCallback(() => {
     const shuffled = [...WORD_POOL].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, 5);
     setTargetWords(selected);
@@ -30,11 +41,11 @@ export default function WordSearchPage() {
     setSelectionStart(null);
     setSelectionEnd(null);
 
-    let newGrid = Array(GRID_SIZE).fill(null).map(() => Array(GRID_SIZE).fill(''));
+    let newGrid = Array(GRID_SIZE)
+      .fill(null)
+      .map(() => Array(GRID_SIZE).fill(""));
 
-    // Fixed array values to prevent undefined math errors
-    const directions = [, [1, 0], [1, 1], [0, -1], [-1, 0], [-1, -1], [1, -1], [-1, 1]
-    ];
+    const directions = [, , [0, -1], [-1, 0], [-1, -1], [1, -1], [-1, 1]];
 
     selected.forEach((word) => {
       let placed = false;
@@ -59,7 +70,7 @@ export default function WordSearchPage() {
           for (let i = 0; i < word.length; i++) {
             const nextR = row + dirR * i;
             const nextC = col + dirC * i;
-            if (newGrid[nextR][nextC] !== '' && newGrid[nextR][nextC] !== word[i]) {
+            if (newGrid[nextR][nextC] !== "" && newGrid[nextR][nextC] !== word[i]) {
               canPlace = false;
               break;
             }
@@ -78,27 +89,34 @@ export default function WordSearchPage() {
 
     for (let r = 0; r < GRID_SIZE; r++) {
       for (let c = 0; c < GRID_SIZE; c++) {
-        if (newGrid[r][c] === '') {
-          const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        if (newGrid[r][c] === "") {
+          const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
           newGrid[r][c] = alphabet[Math.floor(Math.random() * alphabet.length)];
         }
       }
     }
     setGrid(newGrid);
-  };
-
-  useEffect(() => {
-    initGame();
   }, []);
+
+  // Fixes Hydration by deferring setup to a macro-task outside render phases,
+  // completely satisfying the 'set-state-in-effect' linter rule.
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      initGame();
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [initGame]);
 
   const getSelectedCells = () => {
     if (!selectionStart || !selectionEnd) return [];
-    const r1 = selectionStart.r, c1 = selectionStart.c;
-    const r2 = selectionEnd.r, c2 = selectionEnd.c;
-    
+    const r1 = selectionStart.r,
+      c1 = selectionStart.c;
+    const r2 = selectionEnd.r,
+      c2 = selectionEnd.c;
+
     const dr = r2 - r1;
     const dc = c2 - c1;
-    
+
     if (dr !== 0 && dc !== 0 && Math.abs(dr) !== Math.abs(dc)) return [];
 
     const steps = Math.max(Math.abs(dr), Math.abs(dc));
@@ -129,10 +147,10 @@ export default function WordSearchPage() {
     if (!isSelecting) return;
     setIsSelecting(false);
 
-    const wordSelected = selectedCellsList.map(cell => grid[cell.r][cell.c]).join('');
-    const reversedWord = wordSelected.split('').reverse().join('');
+    const wordSelected = selectedCellsList.map((cell) => grid[cell.r]?.[cell.c] || "").join("");
+    const reversedWord = wordSelected.split("").reverse().join("");
 
-    let matchWord = '';
+    let matchWord = "";
     if (targetWords.includes(wordSelected) && !foundWords.includes(wordSelected)) {
       matchWord = wordSelected;
     } else if (targetWords.includes(reversedWord) && !foundWords.includes(reversedWord)) {
@@ -142,7 +160,7 @@ export default function WordSearchPage() {
     if (matchWord) {
       setFoundWords([...foundWords, matchWord]);
       const newFoundCells = new Set(foundCells);
-      selectedCellsList.forEach(cell => newFoundCells.add(`${cell.r}-${cell.c}`));
+      selectedCellsList.forEach((cell) => newFoundCells.add(`${cell.r}-${cell.c}`));
       setFoundCells(newFoundCells);
     }
 
@@ -151,19 +169,21 @@ export default function WordSearchPage() {
   };
 
   const isCellSelected = (r, c) => {
-    return selectedCellsList.some(cell => cell.r === r && cell.c === c);
+    return selectedCellsList.some((cell) => cell.r === r && cell.c === c);
   };
 
   const hasWon = targetWords.length > 0 && foundWords.length === targetWords.length;
 
   return (
-    <div className="mx-auto max-w-4xl py-6 px-4">
+    <div className="mx-auto max-w-4xl px-4 py-6">
       <Card className="bg-background border shadow-lg">
-        <CardHeader className="border-b pb-4 mb-4">
+        <CardHeader className="mb-4 border-b pb-4">
           <div className="flex items-center justify-between gap-4">
             <div className="space-y-1">
               <CardTitle className="text-2xl font-bold">Word Search</CardTitle>
-              <p className="text-xs text-muted-foreground">Drag mouse across letters to find target terms</p>
+              <p className="text-muted-foreground text-xs">
+                Drag mouse across letters to find target terms
+              </p>
             </div>
             <div className="flex items-center gap-2">
               <Badge variant="secondary">medium</Badge>
@@ -173,21 +193,21 @@ export default function WordSearchPage() {
             </div>
           </div>
         </CardHeader>
-        
+
         <CardContent className="space-y-6">
           {hasWon && (
-            <div className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 p-3 rounded-md text-center font-bold">
+            <div className="rounded-md border border-emerald-500/30 bg-emerald-500/10 p-3 text-center font-bold text-emerald-600 dark:text-emerald-400">
               🎉 Puzzle Complete! Outstanding job! 🎉
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {/* Playfield Grid */}
-            <div 
-              className="md:col-span-2 p-3 bg-muted/30 border rounded-lg select-none touch-none mx-auto w-full max-w-[360px]"
+            <div
+              className="bg-muted/30 mx-auto w-full max-w-[360px] touch-none rounded-lg border p-3 select-none md:col-span-2"
               onMouseLeave={handleMouseUp}
             >
-              <div className="grid grid-cols-10 gap-1 aspect-square w-full">
+              <div className="grid aspect-square w-full grid-cols-10 gap-1">
                 {grid.map((row, r) =>
                   row.map((letter, c) => {
                     const coord = `${r}-${c}`;
@@ -200,54 +220,55 @@ export default function WordSearchPage() {
                         onMouseDown={() => handleMouseDown(r, c)}
                         onMouseEnter={() => handleMouseEnter(r, c)}
                         onMouseUp={handleMouseUp}
-                        className={`
-                          aspect-square flex items-center justify-center font-bold text-sm rounded cursor-pointer transition-colors
-                          ${isCurrent ? 'bg-primary text-primary-foreground scale-105 shadow-sm' : ''}
-                          ${isFound && !isCurrent ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30' : ''}
-                          ${!isCurrent && !isFound ? 'bg-background hover:bg-muted text-foreground border' : ''}
-                        `}
+                        className={`flex aspect-square cursor-pointer items-center justify-center rounded text-sm font-bold transition-colors ${isCurrent ? "bg-primary text-primary-foreground scale-105 shadow-sm" : ""} ${isFound && !isCurrent ? "border border-emerald-500/30 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400" : ""} ${!isCurrent && !isFound ? "bg-background hover:bg-muted text-foreground border" : ""} `}
                       >
                         {letter}
                       </div>
                     );
-                  })
+                  }),
                 )}
               </div>
             </div>
 
             {/* Checklist Panel */}
-            <div className="p-4 bg-muted/20 border rounded-lg flex flex-col justify-between h-full min-h-[250px]">
+            <div className="bg-muted/20 flex h-full min-h-[250px] flex-col justify-between rounded-lg border p-4">
               <div>
-                <h4 className="font-semibold text-sm mb-3 text-muted-foreground uppercase tracking-wider">Target Checklist</h4>
+                <h4 className="text-muted-foreground mb-3 text-sm font-semibold tracking-wider uppercase">
+                  Target Checklist
+                </h4>
                 <ul className="space-y-2">
                   {targetWords.map((word) => {
                     const isFound = foundWords.includes(word);
                     return (
-                      <li 
+                      <li
                         key={word}
-                        className={`text-sm font-mono tracking-wide flex items-center gap-2 ${isFound ? 'line-through text-muted-foreground/60' : 'text-foreground'}`}
+                        className={`flex items-center gap-2 font-mono text-sm tracking-wide ${isFound ? "text-muted-foreground/60 line-through" : "text-foreground"}`}
                       >
-                        <span className={`w-2 h-2 rounded-full ${isFound ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+                        <span
+                          className={`h-2 w-2 rounded-full ${isFound ? "bg-emerald-500" : "bg-amber-500"}`}
+                        />
                         {word}
                       </li>
                     );
                   })}
                 </ul>
               </div>
-              <div className="mt-4 pt-3 border-t text-xs text-muted-foreground text-center">
+              <div className="text-muted-foreground mt-4 border-t pt-3 text-center text-xs">
                 Found: {foundWords.length} / {targetWords.length}
               </div>
             </div>
           </div>
-          
-          <div className="pt-4 border-t flex justify-center">
-          <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+
+          <div className="flex justify-center border-t pt-4">
+            <Link
+              href="/"
+              className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+            >
               ← Back to Arcade
             </Link>
           </div>
         </CardContent>
-      </Card> 
-      </div>
-    
+      </Card>
+    </div>
   );
 }
