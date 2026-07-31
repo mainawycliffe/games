@@ -27,9 +27,7 @@ export default function HangmanPage() {
             issue #4. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(4)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #4)
-            </Link>
+            <Link href={issueUrl(4)}>Read the full spec (issue #4)</Link>
           </Button>
         </CardContent>
       </Card>

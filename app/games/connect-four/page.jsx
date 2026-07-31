@@ -25,9 +25,7 @@ export default function ConnectFourPage() {
             issue #2. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(2)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #2)
-            </Link>
+            <Link href={issueUrl(2)}>Read the full spec (issue #2)</Link>
           </Button>
         </CardContent>
       </Card>

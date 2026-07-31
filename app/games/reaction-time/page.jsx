@@ -1,36 +1,119 @@
-import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { issueUrl } from "@/app/games/_lib/loader";
+"use client";
 
-// 🚧 PLACEHOLDER — this game hasn't been built yet.
-// If you claimed "Reaction Time", replace everything in this file with your game.
-// See app/games/tic-tac-toe/ for a complete worked example, and CONTRIBUTING.md.
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+
 export default function ReactionTimePage() {
+  const [gameState, setGameState] = useState("idle");
+  const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
+  const [startTime, setStartTime] = useState(0);
+  const [timerId, setTimerId] = useState(null);
+
+  const isFoul = gameState === "foul";
+  const isResult = gameState === "result";
+  const isWaiting = gameState === "waiting";
+  const isReady = gameState === "ready";
+  const isIdle = gameState === "idle";
+
+  let status = "";
+  if (isWaiting) {
+    status = "Hold steady... Wait for GREEN!";
+  } else if (isReady) {
+    status = "CLICK NOW!";
+  } else if (isFoul) {
+    status = "Too early! You clicked before it turned green.";
+  } else if (isResult) {
+    status = `Your reaction speed: ${score} ms`;
+  } else {
+    status = "Click the pad below to start the reflex test.";
+  }
+  function startTheGame() {
+    setGameState("waiting");
+    const randomTime = Math.floor(Math.random() * 3000) + 2000;
+
+    const newTimer = setTimeout(() => {
+      setGameState("ready");
+      setStartTime(Date.now());
+    }, randomTime);
+
+    setTimerId(newTimer);
+  }
+
+  function handleClick() {
+    if (isIdle || isResult || isFoul) {
+      startTheGame();
+    } else if (isWaiting) {
+      clearTimeout(timerId);
+      setGameState("foul");
+    } else if (isReady) {
+      const clickTime = Date.now();
+      const difference = clickTime - startTime;
+
+      setScore(difference);
+      setGameState("result");
+
+      if (bestScore === 0 || difference < bestScore) {
+        setBestScore(difference);
+      }
+    }
+  }
+
+  function reset() {
+    if (timerId) clearTimeout(timerId);
+    setGameState("idle");
+    setScore(0);
+    setBestScore(0);
+    setStartTime(0);
+    setTimerId(null);
+  }
+
   return (
-    <div className="mx-auto max-w-md py-12">
+    <div className="mx-auto max-w-sm">
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between gap-2">
-            <CardTitle>Reaction Time</CardTitle>
-            <Badge variant="secondary">easy</Badge>
-          </div>
+          <CardTitle>Reaction Time Test</CardTitle>
         </CardHeader>
-        <CardContent className="text-muted-foreground space-y-4 text-sm">
-          <p className="text-foreground text-base">
-            {"Click the instant the screen changes — measure your reflexes."}
+        <CardContent className="space-y-6">
+          <p
+            aria-live="polite"
+            className="min-h-[56px] text-center text-lg font-medium"
+            data-testid="status"
+          >
+            {status}
           </p>
-          <p>🚧 This game hasn&apos;t been built yet.</p>
-          <p>
-            The full spec — objective, rules, required features and definition of done — lives in
-            issue #12. Claim it, then replace this file with your game.
-          </p>
-          <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(12)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #12)
-            </Link>
-          </Button>
+
+          <div className="mx-auto flex w-full justify-center">
+            <button
+              type="button"
+              onClick={handleClick}
+              className={cn(
+                "flex h-48 w-full flex-col items-center justify-center rounded-xl border text-2xl font-bold uppercase transition-all duration-100 select-none",
+                isIdle &&
+                  "border-slate-300 bg-slate-100 text-slate-700 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200",
+                isWaiting && "animate-pulse border-rose-600 bg-rose-500 text-white",
+                isReady && "scale-[1.02] border-emerald-600 bg-emerald-500 text-white",
+                isFoul && "border-amber-600 bg-amber-500 text-white",
+                isResult && "border-sky-600 bg-sky-500 text-white",
+              )}
+            >
+              {isReady ? "TAP NOW!" : "CLICK TO PLAY"}
+            </button>
+          </div>
+
+          <div className="text-muted-foreground flex items-center justify-between border-t pt-4 text-sm font-medium">
+            <div>
+              Best Score:{" "}
+              <span className="text-foreground font-bold">
+                {bestScore === 0 ? "-" : `${bestScore} ms`}
+              </span>
+            </div>
+            <Button onClick={reset} variant="outline">
+              New Game
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>

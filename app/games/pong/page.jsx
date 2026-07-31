@@ -27,9 +27,7 @@ export default function PongPage() {
             issue #37. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(37)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #37)
-            </Link>
+            <Link href={issueUrl(37)}>Read the full spec (issue #37)</Link>
           </Button>
         </CardContent>
       </Card>

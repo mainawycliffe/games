@@ -25,9 +25,7 @@ export default function BreakoutPage() {
             issue #41. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(41)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #41)
-            </Link>
+            <Link href={issueUrl(41)}>Read the full spec (issue #41)</Link>
           </Button>
         </CardContent>
       </Card>
