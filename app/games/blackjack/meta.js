@@ -4,9 +4,9 @@ const meta = {
   title: "Blackjack",
   difficulty: "medium", // "easy" | "medium" | "hard"
   issue: 28, // GitHub issue number holding the full spec
-  status: "unclaimed", // "unclaimed" | "in-progress" | "done"
-  author: null, // your name, e.g. "Jane Doe"
-  github: null, // your GitHub handle, e.g. "janedoe"
+  status: "done", // "unclaimed" | "in-progress" | "done"
+  author: "Claire Panashe, Mailisha Awour and Sharon Njambi",
+  github: "clairepanashetsuro, mailishaa, njambisharon",
   description: "Beat the dealer without going over 21.",
 };
 
