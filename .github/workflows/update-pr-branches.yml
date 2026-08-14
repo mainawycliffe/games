@@ -56,15 +56,20 @@ jobs:
                   pull_number: pr.number,
                 });
                 updated.push(pr);
+                core.info(`#${pr.number}: merged main in`);
               } catch (err) {
                 // 422 is what the API returns when the branch already matches
                 // main, which is a no-op rather than a problem.
                 if (err.status === 422) {
                   upToDate.push(pr);
+                  core.info(`#${pr.number}: already up to date`);
                 } else if (err.status === 409) {
                   conflicted.push(pr);
+                  core.info(`#${pr.number}: conflicts with main`);
                 } else {
-                  failed.push({ pr, message: `${err.status}: ${err.message}` });
+                  const message = `${err.status}: ${err.message}`;
+                  failed.push({ pr, message });
+                  core.warning(`#${pr.number}: ${message}`);
                 }
               }
             }
