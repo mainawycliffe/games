@@ -1,0 +1,101 @@
+name: Update PR branches
+
+# Merges main into every open pull request whenever main moves, so contributors
+# pick up new CI rules and fixes without having to sync their fork by hand.
+#
+# This works on forks because every PR here has "allow edits by maintainers"
+# enabled. A PR whose branch conflicts with main is reported in the run summary
+# and left alone; only its author can resolve that.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+# Main can move several times in a row; let one update finish before the next
+# starts rather than racing on the same branches.
+concurrency:
+  group: update-pr-branches
+  cancel-in-progress: false
+
+jobs:
+  update:
+    name: Merge main into open PRs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          # GITHUB_TOKEN is enough for forks that allow maintainer edits. If a
+          # run reports 403s, add a PAT with "repo" scope as PR_UPDATE_TOKEN.
+          github-token: ${{ secrets.PR_UPDATE_TOKEN || secrets.GITHUB_TOKEN }}
+          script: |
+            const prs = await github.paginate(github.rest.pulls.list, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              base: "main",
+              per_page: 100,
+            });
+
+            const updated = [];
+            const conflicted = [];
+            const upToDate = [];
+            const failed = [];
+
+            for (const pr of prs) {
+              if (pr.draft) continue;
+
+              try {
+                await github.rest.pulls.updateBranch({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: pr.number,
+                });
+                updated.push(pr);
+              } catch (err) {
+                // 422 is what the API returns when the branch already matches
+                // main, which is a no-op rather than a problem.
+                if (err.status === 422) {
+                  upToDate.push(pr);
+                } else if (err.status === 409) {
+                  conflicted.push(pr);
+                } else {
+                  failed.push({ pr, message: `${err.status}: ${err.message}` });
+                }
+              }
+            }
+
+            const link = (pr) => `[#${pr.number}](${pr.html_url}) ${pr.title}`;
+            const lines = [`## Updated ${updated.length} of ${prs.length} open PRs`, ""];
+
+            const section = (title, items, render) => {
+              if (items.length === 0) return;
+              lines.push(`### ${title} (${items.length})`, "");
+              for (const item of items) lines.push(`- ${render(item)}`);
+              lines.push("");
+            };
+
+            section("Merged main in", updated, link);
+            section("Already up to date", upToDate, link);
+            section(
+              "Conflicts — author must resolve",
+              conflicted,
+              link,
+            );
+            section(
+              "Failed",
+              failed,
+              (f) => `${link(f.pr)} — ${f.message}`,
+            );
+
+            await core.summary.addRaw(lines.join("\n")).write();
+
+            if (failed.length > 0) {
+              core.setFailed(
+                `${failed.length} PR(s) could not be updated; see the run summary.`,
+              );
+            }
