@@ -4,10 +4,10 @@ const meta = {
   title: "Pong",
   difficulty: "medium", // "easy" | "medium" | "hard"
   issue: 37, // GitHub issue number holding the full spec
-  status: "unclaimed", // "unclaimed" | "in-progress" | "done"
-  author: null, // your name, e.g. "Jane Doe"
-  github: null, // your GitHub handle, e.g. "janedoe"
-  description: "Two paddles, one ball — first to the score cap wins.",
+  status: "done", // Changed from "unclaimed" to "done"
+  author: "Your Name Here", // Put your real name inside quotes
+  github: "your-github-username", // Put your GitHub username or name here
+  description: "Two paddles, one ball - first to the score cap wins.",
 };
 
 export default meta;
