@@ -2,11 +2,11 @@
 // When you build this game, fill in author + github and set status to "done".
 const meta = {
   title: "Sokoban",
-  difficulty: "medium", // "easy" | "medium" | "hard"
+  difficulty: "easy", // "easy" | "medium" | "hard"
   issue: 38, // GitHub issue number holding the full spec
-  status: "unclaimed", // "unclaimed" | "in-progress" | "done"
-  author: null, // your name, e.g. "Jane Doe"
-  github: null, // your GitHub handle, e.g. "janedoe"
+  status: "done", // "unclaimed" | "in-progress" | "done"
+  author: "Eyerusalem and Bridget", // your name, e.g. "Jane Doe"
+  github: "BridgetWanjiru", // your GitHub handle, e.g. "janedoe"
   description: "Push every crate onto a target square.",
 };
 
