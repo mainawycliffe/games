@@ -1,16 +1,15 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import NimPage from "./page";
+import { describe, expect, it } from "vitest";
 import {
   createBoard,
-  makeMove,
+  findOptimalMove,
   isGameOver,
+  isValidMove,
+  makeMove,
   remainingInRow,
   totalRemaining,
-  isValidMove,
-  findOptimalMove,
 } from "./logic";
+import NimPage from "./page";
 
 describe("nim logic", () => {
   it("creates a default board with 4 rows", () => {
@@ -38,7 +37,7 @@ describe("nim logic", () => {
   it("ignores illegal moves (too many)", () => {
     const board = createBoard([3]);
     const next = makeMove(board, 0, 5);
-    expect(next).toBe(board); 
+    expect(next).toBe(board);
   });
 
   it("ignores illegal moves (zero or negative)", () => {
@@ -94,4 +93,3 @@ describe("<NimPage />", () => {
     expect(screen.getByRole("button", { name: /new game/i })).toBeInTheDocument();
   });
 });
-
