@@ -21,11 +21,160 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Each check below records its result instead of aborting the job, so a
+      # formatting slip no longer hides lint and build failures. The job is
+      # failed at the end by "Report result".
+      #
+      # Scratch output goes to $RUNNER_TEMP, never the workspace, so these files
+      # cannot show up in Prettier's own file scan.
+
       - name: Check formatting
-        run: npm run format:check
+        id: format
+        run: |
+          set +e
+          npx prettier --list-different . > "$RUNNER_TEMP/format.txt" 2>&1
+          code=$?
+          set -e
+          cat "$RUNNER_TEMP/format.txt"
+          if [ "$code" -eq 0 ]; then
+            echo "status=pass" >> "$GITHUB_OUTPUT"
+          else
+            echo "status=fail" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Lint
-        run: npm run lint
+        id: lint
+        run: |
+          # ESLint 9 dropped the "unix" formatter from core, so use JSON and
+          # render it in the report step.
+          set +e
+          npx eslint -f json -o "$RUNNER_TEMP/lint.json" > "$RUNNER_TEMP/lint-stdout.txt" 2>&1
+          code=$?
+          set -e
+          cat "$RUNNER_TEMP/lint-stdout.txt"
+          if [ "$code" -eq 0 ]; then
+            echo "status=pass" >> "$GITHUB_OUTPUT"
+          else
+            echo "status=fail" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Build
-        run: npm run build
+        id: build
+        run: |
+          set +e
+          npm run build > "$RUNNER_TEMP/build.txt" 2>&1
+          code=$?
+          set -e
+          cat "$RUNNER_TEMP/build.txt"
+          if [ "$code" -eq 0 ]; then
+            echo "status=pass" >> "$GITHUB_OUTPUT"
+          else
+            echo "status=fail" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build report
+        if: always()
+        env:
+          FORMAT: ${{ steps.format.outputs.status }}
+          LINT: ${{ steps.lint.outputs.status }}
+          BUILD: ${{ steps.build.outputs.status }}
+        run: |
+          REPORT="$RUNNER_TEMP/report.md"
+          icon() { if [ "$1" = "pass" ]; then echo "white_check_mark"; else echo "x"; fi; }
+
+          {
+            echo "## CI failed"
+            echo
+            echo "| Check | Result |"
+            echo "| --- | --- |"
+            echo "| Formatting | :$(icon "$FORMAT"): |"
+            echo "| Lint | :$(icon "$LINT"): |"
+            echo "| Build | :$(icon "$BUILD"): |"
+            echo
+          } > "$REPORT"
+
+          if [ "$FORMAT" = "fail" ]; then
+            {
+              echo "### Formatting"
+              echo
+              echo "These files are not formatted with Prettier:"
+              echo
+              echo '```'
+              cat "$RUNNER_TEMP/format.txt"
+              echo '```'
+              echo
+              echo "Fix them all with:"
+              echo
+              echo '```bash'
+              echo "npm run format"
+              echo '```'
+              echo
+            } >> "$REPORT"
+          fi
+
+          if [ "$LINT" = "fail" ]; then
+            {
+              echo "### Lint"
+              echo
+              if [ -s "$RUNNER_TEMP/lint.json" ]; then
+                node .github/scripts/format-eslint.js "$RUNNER_TEMP/lint.json"
+              else
+                # No JSON means ESLint bailed before linting (usually a bad
+                # config); show whatever it printed instead.
+                echo '```'
+                head -60 "$RUNNER_TEMP/lint-stdout.txt"
+                echo '```'
+              fi
+              echo
+              echo "Reproduce with \`npm run lint\`."
+              echo
+            } >> "$REPORT"
+          fi
+
+          if [ "$BUILD" = "fail" ]; then
+            {
+              echo "### Build"
+              echo
+              echo '```'
+              tail -60 "$RUNNER_TEMP/build.txt"
+              echo '```'
+              echo
+              echo "Reproduce with \`npm run build\`."
+              echo
+            } >> "$REPORT"
+          fi
+
+          echo "[View the full run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)" >> "$REPORT"
+
+          # Mirror the report into the run summary so it is useful for pushes to
+          # main too, where there is no PR to comment on.
+          cat "$REPORT" >> "$GITHUB_STEP_SUMMARY"
+
+          echo "${{ github.event.pull_request.number }}" > "$RUNNER_TEMP/pr-number.txt"
+
+      # PRs from forks get a read-only GITHUB_TOKEN, so this job cannot comment
+      # itself. It hands the report to ci-comment.yml, which runs on
+      # workflow_run in the base repo where writing is allowed.
+      - name: Upload report
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-report
+          path: |
+            ${{ runner.temp }}/report.md
+            ${{ runner.temp }}/pr-number.txt
+          retention-days: 1
+
+      - name: Report result
+        if: always()
+        env:
+          FORMAT: ${{ steps.format.outputs.status }}
+          LINT: ${{ steps.lint.outputs.status }}
+          BUILD: ${{ steps.build.outputs.status }}
+        run: |
+          if [ "$FORMAT" = "pass" ] && [ "$LINT" = "pass" ] && [ "$BUILD" = "pass" ]; then
+            echo "All checks passed."
+          else
+            echo "One or more checks failed: format=$FORMAT lint=$LINT build=$BUILD"
+            exit 1
+          fi

@@ -27,9 +27,7 @@ export default function TronDuelPage() {
             issue #51. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(51)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #51)
-            </Link>
+            <Link href={issueUrl(51)}>Read the full spec (issue #51)</Link>
           </Button>
         </CardContent>
       </Card>

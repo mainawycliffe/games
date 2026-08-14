@@ -27,9 +27,7 @@ export default function OddOneOutPage() {
             issue #15. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(15)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #15)
-            </Link>
+            <Link href={issueUrl(15)}>Read the full spec (issue #15)</Link>
           </Button>
         </CardContent>
       </Card>

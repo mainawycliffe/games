@@ -27,9 +27,7 @@ export default function TypingSpeedPage() {
             issue #26. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(26)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #26)
-            </Link>
+            <Link href={issueUrl(26)}>Read the full spec (issue #26)</Link>
           </Button>
         </CardContent>
       </Card>

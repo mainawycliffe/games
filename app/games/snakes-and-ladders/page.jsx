@@ -27,9 +27,7 @@ export default function SnakesAndLaddersPage() {
             issue #32. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(32)} target="_blank" rel="noopener noreferrer">
-              Read the full spec (issue #32)
-            </Link>
+            <Link href={issueUrl(32)}>Read the full spec (issue #32)</Link>
           </Button>
         </CardContent>
       </Card>
