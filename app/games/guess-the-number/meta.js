@@ -4,9 +4,9 @@ const meta = {
   title: "Guess the Number",
   difficulty: "easy", // "easy" | "medium" | "hard"
   issue: 6, // GitHub issue number holding the full spec
-  status: "unclaimed", // "unclaimed" | "in-progress" | "done"
-  author: null, // your name, e.g. "Jane Doe"
-  github: null, // your GitHub handle, e.g. "janedoe"
+  status: "claimed", // "unclaimed" | "in-progress" | "done"
+  author: "Mailisha Awuor, Sharon Njambi, Claire Panashe ",
+  github: "mailishaa, njambisharon , clairepanashetsuro",
   description: "Higher or lower until you find the secret number.",
 };
 
