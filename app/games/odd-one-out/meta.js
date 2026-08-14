@@ -4,8 +4,8 @@ const meta = {
   title: "Odd One Out",
   difficulty: "easy", // "easy" | "medium" | "hard"
   issue: 15, // GitHub issue number holding the full spec
-  status: "unclaimed", // "unclaimed" | "in-progress" | "done"
-  author: null, // your name, e.g. "Jane Doe"
+  status: "done", // "unclaimed" | "in-progress" | "done"
+  author: "Maria Nyanungo and Stacy Cherenge", // your name, e.g. "Jane Doe"
   github: null, // your GitHub handle, e.g. "janedoe"
   description: "Spot the one tile that's a slightly different color.",
 };
