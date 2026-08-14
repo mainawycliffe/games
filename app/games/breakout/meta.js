@@ -4,9 +4,9 @@ const meta = {
   title: "Breakout",
   difficulty: "hard", // "easy" | "medium" | "hard"
   issue: 41, // GitHub issue number holding the full spec
-  status: "unclaimed", // "unclaimed" | "in-progress" | "done"
-  author: null, // your name, e.g. "Jane Doe"
-  github: null, // your GitHub handle, e.g. "janedoe"
+  status: "done", // "unclaimed" | "in-progress" | "done"
+  author: "Divine & Anualithe", // your name, e.g. "Jane Doe"
+  github: "iirasubizadivine", // your GitHub handle, e.g. "janedoe"
   description: "Bounce the ball to smash every brick.",
 };
 
