@@ -22,7 +22,12 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.workflow_run.event == 'pull_request'
     steps:
+      # Runs started before this reporting existed, or that died before the
+      # upload step, have no artifact. That is not an error here: skip the
+      # comment instead of failing and adding noise to the Actions tab.
       - name: Download report
+        id: download
+        continue-on-error: true
         uses: actions/download-artifact@v4
         with:
           name: ci-report
@@ -31,6 +36,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upsert comment
+        if: steps.download.outcome == 'success'
         uses: actions/github-script@v7
         env:
           CONCLUSION: ${{ github.event.workflow_run.conclusion }}
