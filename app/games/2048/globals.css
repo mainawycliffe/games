@@ -1,0 +1,48 @@
+body{
+    background-color: white;
+}
+.main-container{
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    align-items: center;
+    background-color: saddlebrown; 
+    border: 5px solid saddlebrown; 
+    border-radius: 15px;
+}
+
+.grid div{
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    height: 110px;
+    width: 110px;
+    margin: 5px;
+    border-radius: 15px;
+    background-color: rgb(211, 125, 85);
+    color: white;
+}
+
+.grid div:empty {
+    background-color: rgba(238, 228, 218, 0.35); 
+}
+
+.grid .tile-2 { background-color: #eee4da; color: #776e65; font-size: 40px; font-weight: bold; }
+.grid .tile-4 { background-color: #ede0c8; color: #776e65; font-size: 40px; font-weight: bold; }
+.grid .tile-8 { background-color: #f2b179; color: #f9f6f2; font-size: 40px; font-weight: bold; }
+.grid .tile-16 { background-color: #f59563; color: #f9f6f2; font-size: 40px; font-weight: bold; }
+.grid .tile-32 { background-color: #f67c5f; color: #f9f6f2; font-size: 40px; font-weight: bold; }
+.grid .tile-64 { background-color: #f65e3b; color: #f9f6f2; font-size: 40px; font-weight: bold; }
+.grid .tile-128 { background-color: #edcf72; color: #f9f6f2; font-size: 34px; font-weight: bold; }
+.grid .tile-256 { background-color: #edcc61; color: #f9f6f2; font-size: 34px; font-weight: bold; }
+.grid .tile-512 { background-color: #edc850; color: #f9f6f2; font-size: 34px; font-weight: bold; }
+.grid .tile-1024 { background-color: #edc53f; color: #f9f6f2; font-size: 28px; font-weight: bold; }
+.grid .tile-2048 { background-color: #edc22e; color: #f9f6f2; font-size: 28px; font-weight: bold; }
