@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { issueUrl } from "@/app/games/_lib/loader";
 
-// 🚧 PLACEHOLDER — this game hasn't been built yet.
+// :construction: PLACEHOLDER — this game hasn't been built yet.
 // If you claimed "Tetris", replace everything in this file with your game.
 // See app/games/tic-tac-toe/ for a complete worked example, and CONTRIBUTING.md.
 export default function TetrisPage() {
@@ -21,13 +21,15 @@ export default function TetrisPage() {
           <p className="text-foreground text-base">
             {"Rotate and stack falling blocks to clear lines."}
           </p>
-          <p>🚧 This game hasn&apos;t been built yet.</p>
+          <p>:construction: This game hasn&apos;t been built yet.</p>
           <p>
             The full spec — objective, rules, required features and definition of done — lives in
             issue #39. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(39)}>Read the full spec (issue #39)</Link>
+            <Link href={issueUrl(39)} target="_blank" rel="noopener noreferrer">
+              Read the full spec (issue #39)
+            </Link>
           </Button>
         </CardContent>
       </Card>

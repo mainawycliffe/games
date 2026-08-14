@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { issueUrl } from "@/app/games/_lib/loader";
 
-// 🚧 PLACEHOLDER — this game hasn't been built yet.
+// :construction: PLACEHOLDER — this game hasn't been built yet.
 // If you claimed "Rock Paper Scissors", replace everything in this file with your game.
 // See app/games/tic-tac-toe/ for a complete worked example, and CONTRIBUTING.md.
 export default function RockPaperScissorsPage() {
@@ -19,13 +19,15 @@ export default function RockPaperScissorsPage() {
         </CardHeader>
         <CardContent className="text-muted-foreground space-y-4 text-sm">
           <p className="text-foreground text-base">{"Best-of-N against the computer."}</p>
-          <p>🚧 This game hasn&apos;t been built yet.</p>
+          <p>:construction: This game hasn&apos;t been built yet.</p>
           <p>
             The full spec — objective, rules, required features and definition of done — lives in
             issue #5. Claim it, then replace this file with your game.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link href={issueUrl(5)}>Read the full spec (issue #5)</Link>
+            <Link href={issueUrl(5)} target="_blank" rel="noopener noreferrer">
+              Read the full spec (issue #5)
+            </Link>
           </Button>
         </CardContent>
       </Card>
