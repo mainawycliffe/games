@@ -1,0 +1,84 @@
+name: CI comment
+
+# Posts the CI report from ci.yml onto the pull request.
+#
+# This is a separate workflow because PRs in this repo come from forks, and on
+# the pull_request trigger those runs get a read-only GITHUB_TOKEN. workflow_run
+# runs in the context of the base repository, so it can write comments while
+# never checking out or executing contributor code.
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+
+permissions:
+  actions: read
+  pull-requests: write
+
+jobs:
+  comment:
+    name: Comment on PR
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.event == 'pull_request'
+    steps:
+      - name: Download report
+        uses: actions/download-artifact@v4
+        with:
+          name: ci-report
+          path: report
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upsert comment
+        uses: actions/github-script@v7
+        env:
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+        with:
+          script: |
+            const fs = require("fs");
+
+            // Hidden marker so each new run edits one comment instead of
+            // stacking a new one on every push.
+            const MARKER = "<!-- ci-report -->";
+
+            const prNumber = Number(fs.readFileSync("report/pr-number.txt", "utf8").trim());
+            if (!Number.isInteger(prNumber) || prNumber <= 0) {
+              core.setFailed(`Could not read a PR number (got "${prNumber}")`);
+              return;
+            }
+
+            const failed = process.env.CONCLUSION === "failure";
+            const body = failed
+              ? `${MARKER}\n${fs.readFileSync("report/report.md", "utf8")}`
+              : `${MARKER}\n## CI passed :white_check_mark:\n\nAll checks are green.`;
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              per_page: 100,
+            });
+            const existing = comments.find(
+              (c) => c.user.type === "Bot" && c.body.includes(MARKER),
+            );
+
+            // Stay silent on a green run unless a previous failure comment
+            // needs clearing.
+            if (!failed && !existing) return;
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body,
+              });
+            }
