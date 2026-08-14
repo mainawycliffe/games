@@ -4,10 +4,10 @@ const meta = {
   title: "Sudoku",
   difficulty: "medium", // "easy" | "medium" | "hard"
   issue: 25, // GitHub issue number holding the full spec
-  status: "unclaimed", // "unclaimed" | "in-progress" | "done"
-  author: null, // your name, e.g. "Jane Doe"
-  github: null, // your GitHub handle, e.g. "janedoe"
-  description: "Fill the grid so every row, column and box has 1–9.",
+  status: "done", // "unclaimed" | "in-progress" | "done"
+  author: "Quinta Susan & Franca Sirila" ,// your name, e.g. "Jane Doe"
+  github: "quintawsusan & francasirila", // your GitHub handle, e.g. "janedoe"
+  description: "Fill the grid so every row, column and box has 1-9.",
 };
 
 export default meta;

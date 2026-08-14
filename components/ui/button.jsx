@@ -40,7 +40,7 @@ const buttonVariants = cva(
   },
 );
 
-function Button({ className, variant = "default", size = "default", ...props }) {
+function Button({ className, variant = "default", size = "default", asChild = false, ...props }) {
   return (
     <ButtonPrimitive
       data-slot="button"
